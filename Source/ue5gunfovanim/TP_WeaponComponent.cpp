@@ -15,6 +15,9 @@ UTP_WeaponComponent::UTP_WeaponComponent()
 {
 	// Default offset from the character location for projectiles to spawn
 	MuzzleOffset = FVector(100.0f, 0.0f, 10.0f);
+
+	// by default disable custom render matrix
+	EnableCustomRenderMatrix = false;
 }
 
 
@@ -70,6 +73,8 @@ void UTP_WeaponComponent::AttachWeapon(Aue5gunfovanimCharacter* TargetCharacter)
 	{
 		return;
 	}
+
+	EnableCustomRenderMatrix = true;
 
 	// Attach the weapon to the First Person Character
 	FAttachmentTransformRules AttachmentRules(EAttachmentRule::SnapToTarget, true);
