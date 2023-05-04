@@ -9,6 +9,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Camera/CameraComponent.h"
 
 // Sets default values for this component's properties
 UTP_WeaponComponent::UTP_WeaponComponent()
@@ -82,7 +83,8 @@ void UTP_WeaponComponent::AttachWeapon(Aue5gunfovanimCharacter* TargetCharacter)
 	// Note: once a component is registered, I must only use AttachToComponent. i.e., this won't work:
 	// SetupAttachment(Character->GetMesh1P());
 	FAttachmentTransformRules AttachmentRules(EAttachmentRule::SnapToTarget, true);
-	AttachToComponent(Character->GetMesh1P(), AttachmentRules, FName(TEXT("GripPoint")));
+	// AttachToComponent(Character->GetMesh1P(), AttachmentRules, FName(TEXT("GripPoint")));
+	AttachToComponent(Character->GetFirstPersonCameraComponent(), AttachmentRules, "");
 
 	// switch bHasRifle so the animation blueprint can switch to another animation set
 	Character->SetHasRifle(true);
