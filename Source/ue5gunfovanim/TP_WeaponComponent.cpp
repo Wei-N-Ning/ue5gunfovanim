@@ -80,7 +80,8 @@ void UTP_WeaponComponent::AttachWeapon(Aue5gunfovanimCharacter* TargetCharacter)
 	EnableCustomRenderMatrix = true;
 
 	// Attach the weapon to the First Person Character
-	// Note: once a component is registered, I must only use AttachToComponent. i.e., this won't work:
+	// Note: once a component is registered, I must only use AttachToComponent.
+	// i.e., this won't work:
 	// SetupAttachment(Character->GetMesh1P());
 	FAttachmentTransformRules AttachmentRules(EAttachmentRule::SnapToTarget, true);
 	// AttachToComponent(Character->GetMesh1P(), AttachmentRules, FName(TEXT("GripPoint")));
