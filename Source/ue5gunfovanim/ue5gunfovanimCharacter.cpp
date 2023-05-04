@@ -1,12 +1,12 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "ue5gunfovanimCharacter.h"
-#include "ue5gunfovanimProjectile.h"
 #include "Animation/AnimInstance.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "ViewModelSkeletalMeshComponent.h"
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -16,10 +16,10 @@ Aue5gunfovanimCharacter::Aue5gunfovanimCharacter()
 {
 	// Character doesnt have a rifle at start
 	bHasRifle = false;
-	
+
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(55.f, 96.0f);
-		
+
 	// Create a CameraComponent	
 	FirstPersonCameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
 	FirstPersonCameraComponent->SetupAttachment(GetCapsuleComponent());
@@ -35,6 +35,12 @@ Aue5gunfovanimCharacter::Aue5gunfovanimCharacter()
 	//Mesh1P->SetRelativeRotation(FRotator(0.9f, -19.19f, 5.2f));
 	Mesh1P->SetRelativeLocation(FVector(-30.f, 0.f, -150.f));
 
+	// Initialize the debug gun mesh
+	GunMesh = CreateDefaultSubobject<UViewModelSkeletalMeshComponent>(TEXT("GunMesh1P"));
+	GunMesh->SetOnlyOwnerSee(true);
+	GunMesh->SetupAttachment(FirstPersonCameraComponent);
+	GunMesh->bCastDynamicShadow = false;
+	GunMesh->CastShadow = false;
 }
 
 void Aue5gunfovanimCharacter::BeginPlay()
@@ -45,12 +51,12 @@ void Aue5gunfovanimCharacter::BeginPlay()
 	//Add Input Mapping Context
 	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
 	{
-		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<
+			UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
 		{
 			Subsystem->AddMappingContext(DefaultMappingContext, 0);
 		}
 	}
-
 }
 
 //////////////////////////////////////////////////////////////////////////// Input

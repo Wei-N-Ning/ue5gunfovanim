@@ -56,6 +56,10 @@ protected:
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 private:
-	/** The Character holding this weapon*/
+	/** The Character holding this weapon
+	 * By default this weapon is left on the ground;
+	 * A character must walk into its pick-up radius to trigger AttachWeapon().
+	 * This function will set this property to the said character.
+	 */
 	Aue5gunfovanimCharacter* Character;
 };

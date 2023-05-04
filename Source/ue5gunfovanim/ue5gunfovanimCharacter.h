@@ -9,6 +9,7 @@
 
 class UInputComponent;
 class USkeletalMeshComponent;
+class UViewModelSkeletalMeshComponent;
 class USceneComponent;
 class UCameraComponent;
 class UAnimMontage;
@@ -23,6 +24,10 @@ class Aue5gunfovanimCharacter : public ACharacter
 	UPROPERTY(VisibleDefaultsOnly, Category=Mesh)
 	USkeletalMeshComponent* Mesh1P;
 
+	// debug mesh - to set it to the gun skelmesh and compare to the standalone gun
+	UPROPERTY(VisibleDefaultsOnly, Category = Weapon)
+	UViewModelSkeletalMeshComponent* GunMesh;
+	
 	/** First person camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	UCameraComponent* FirstPersonCameraComponent;
