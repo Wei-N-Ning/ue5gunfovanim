@@ -87,7 +87,16 @@ FMatrix UViewModelSkeletalMeshComponent::GetRenderMatrix() const
 		};
 	}
 
+	// When both are attached to the 1P camera component
+	// CharacterMesh1P ComponentTransform 1477.330044,653.035744,11.720667 |-5.425000,77.525001,0.000000|1.000000,1.000000,1.000000
+	// RifleMeshFOV    ComponentTransform 1475.918835,739.243787,154.430799|-0.000000,-12.474998,5.425000|1.000000,1.000000,1.000000
+
+	// When RifleMeshFOV is attached to the 1P skelmesh socket
+	// CharacterMesh1P ComponentTransform 1430.454757,756.859685,19.457381 |-13.475000,81.375000,0.000000|1.000000,1.000000,1.000000
+	// RifleMeshFOV    ComponentTransform 1460.865118,839.103408,124.447253|15.246957,-80.907114,12.937009|1.000000,1.000000,1.000000
 	const FTransform ComponentTransform = GetComponentTransform();
+	UE_LOG(LogTemp, Log, TEXT("%ls ComponentTransform %s"), *GetName(), *ComponentTransform.ToString());
+
 	const FMatrix NewViewProjectionMatrix = ViewMatrix * NewProjectionMatrix;
 	const FMatrix InverseOldViewProjectionMatrix = InverseViewProjectionMatrix;
 	const FMatrix ModelMatrix = ComponentTransform.ToMatrixWithScale();

@@ -84,8 +84,8 @@ void UTP_WeaponComponent::AttachWeapon(Aue5gunfovanimCharacter* TargetCharacter)
 	// i.e., this won't work:
 	// SetupAttachment(Character->GetMesh1P());
 	FAttachmentTransformRules AttachmentRules(EAttachmentRule::SnapToTarget, true);
-	// AttachToComponent(Character->GetMesh1P(), AttachmentRules, FName(TEXT("GripPoint")));
-	AttachToComponent(Character->GetFirstPersonCameraComponent(), AttachmentRules, "");
+	AttachToComponent(Character->GetMesh1P(), AttachmentRules, FName(TEXT("GripPoint")));
+	// AttachToComponent(Character->GetFirstPersonCameraComponent(), AttachmentRules, "");
 
 	// switch bHasRifle so the animation blueprint can switch to another animation set
 	Character->SetHasRifle(true);
