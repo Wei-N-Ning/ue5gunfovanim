@@ -1,4 +1,6 @@
 ﻿#include "ViewModelSkeletalMeshComponent.h"
+
+#include "DebugHud.h"
 #include "FovUtils.h"
 #include "Engine/LocalPlayer.h"
 #include "GameFramework/PlayerController.h"
@@ -95,7 +97,8 @@ FMatrix UViewModelSkeletalMeshComponent::GetRenderMatrix() const
 	// CharacterMesh1P ComponentTransform 1430.454757,756.859685,19.457381 |-13.475000,81.375000,0.000000|1.000000,1.000000,1.000000
 	// RifleMeshFOV    ComponentTransform 1460.865118,839.103408,124.447253|15.246957,-80.907114,12.937009|1.000000,1.000000,1.000000
 	const FTransform ComponentTransform = GetComponentTransform();
-	UE_LOG(LogTemp, Log, TEXT("%ls ComponentTransform %s"), *GetName(), *ComponentTransform.ToString());
+	AddDebugMessage(
+		FString::Printf(TEXT("%ls ComponentTransform %s"), *GetName(), *ComponentTransform.ToString()));
 
 	const FMatrix NewViewProjectionMatrix = ViewMatrix * NewProjectionMatrix;
 	const FMatrix InverseOldViewProjectionMatrix = InverseViewProjectionMatrix;
@@ -200,4 +203,16 @@ FMatrices UViewModelSkeletalMeshComponent::GetMatrices(const UWorld& World) cons
 	Matrices.NearClippingPlaneDistance = Matrices.ProjectionMatrix.M[3][2];
 
 	return Matrices;
+}
+
+void UViewModelSkeletalMeshComponent::AddDebugMessage(FString&& Message) const
+{
+	if (const auto World = GetWorld())
+	{
+		if (const auto PlayerController = World->GetFirstPlayerController())
+		{
+			const auto hud = Cast<ADebugHud>(PlayerController->GetHUD());
+			hud->AddDebugMessage(Message, FColor::Green, 1.25f);
+		}
+	}
 }

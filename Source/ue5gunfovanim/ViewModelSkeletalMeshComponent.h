@@ -4,6 +4,8 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "ViewModelSkeletalMeshComponent.generated.h"
 
+class ADebugHud;
+
 struct FMatrices
 {
 	FMatrix ViewMatrix;
@@ -49,4 +51,6 @@ public:
 private:
 	// GetMatrices must only be called when the PlayerController is valid and there is a LocalPlayer
 	FMatrices GetMatrices(const UWorld& World) const;
+
+	void AddDebugMessage(FString&& Message) const;
 };
