@@ -83,6 +83,13 @@ void UTP_WeaponComponent::AttachWeapon(Aue5gunfovanimCharacter* TargetCharacter)
 	// Note: once a component is registered, I must only use AttachToComponent.
 	// i.e., this won't work:
 	// SetupAttachment(Character->GetMesh1P());
+
+	// Hierarchy
+	// BP_PickUp_Rifle
+	//   TP_Weapon (class: TP_WeaponComponent) <-- I'm here
+	//     TP_PickUp (class: TP_PickUpComponent)
+	// 	     RifleMeshFOV (class: UViewModelSkeletalMeshComponent) <-- I want to retrieve this
+	// 	     RifleMesh_0 (unused/invisible)
 	const FAttachmentTransformRules AttachmentRules(EAttachmentRule::SnapToTarget, true);
 	AttachToComponent(Character->GetMesh1P(), AttachmentRules, FName(TEXT("GripPoint")));
 	// AttachToComponent(Character->GetFirstPersonCameraComponent(), AttachmentRules, "");
