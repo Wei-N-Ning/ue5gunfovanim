@@ -29,6 +29,10 @@ public:
 	UPROPERTY(EditAnywhere, Category=Mesh)
 	bool EnableCustomRenderMatrix = true;
 
+	// TODO: remove!
+	UPROPERTY(EditAnywhere, Category=Mesh)
+	bool UseParentComponent = false;
+
 	// The calculation to render an object with a camera that has the World FOV is
 	// M . V . P = T
 	// where

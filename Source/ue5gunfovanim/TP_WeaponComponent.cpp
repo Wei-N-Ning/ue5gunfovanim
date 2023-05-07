@@ -83,7 +83,7 @@ void UTP_WeaponComponent::AttachWeapon(Aue5gunfovanimCharacter* TargetCharacter)
 	// Note: once a component is registered, I must only use AttachToComponent.
 	// i.e., this won't work:
 	// SetupAttachment(Character->GetMesh1P());
-	FAttachmentTransformRules AttachmentRules(EAttachmentRule::SnapToTarget, true);
+	const FAttachmentTransformRules AttachmentRules(EAttachmentRule::SnapToTarget, true);
 	AttachToComponent(Character->GetMesh1P(), AttachmentRules, FName(TEXT("GripPoint")));
 	// AttachToComponent(Character->GetFirstPersonCameraComponent(), AttachmentRules, "");
 
