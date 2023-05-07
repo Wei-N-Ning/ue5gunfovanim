@@ -90,8 +90,30 @@ void UTP_WeaponComponent::AttachWeapon(Aue5gunfovanimCharacter* TargetCharacter)
 	//     TP_PickUp (class: TP_PickUpComponent)
 	// 	     RifleMeshFOV (class: UViewModelSkeletalMeshComponent) <-- I want to retrieve this
 	// 	     RifleMesh_0 (unused/invisible)
+
+	// UViewModelSkeletalMeshComponent* RifleMeshFOV = nullptr;
+	// TArray<USceneComponent*> Children;
+	// GetChildrenComponents(true, Children);
+	//
+	// for (USceneComponent* Child : Children)
+	// {
+	// 	if (Child->IsA(UViewModelSkeletalMeshComponent::StaticClass()))
+	// 	{
+	// 		RifleMeshFOV = Cast<UViewModelSkeletalMeshComponent>(Child);
+	// 		break;
+	// 	}
+	// }
+	//
+	// if (RifleMeshFOV)
+	// {
+	// 	// Attach the RifleMeshFOV directly to the 1st-person arm mesh (on a socket on the arm mesh)
+	// 	// RifleMeshFOV->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
+	// 	const FAttachmentTransformRules AttachmentRules(EAttachmentRule::SnapToTarget, true);
+	// 	// RifleMeshFOV->AttachToComponent(Character->GetMesh1P(), AttachmentRules, FName(TEXT("GripPoint")));
+	// }
+
 	const FAttachmentTransformRules AttachmentRules(EAttachmentRule::SnapToTarget, true);
-	AttachToComponent(Character->GetMesh1P(), AttachmentRules, FName(TEXT("GripPoint")));
+	this->AttachToComponent(Character->GetMesh1P(), AttachmentRules, FName(TEXT("GripPoint")));
 	// AttachToComponent(Character->GetFirstPersonCameraComponent(), AttachmentRules, "");
 
 	// switch bHasRifle so the animation blueprint can switch to another animation set

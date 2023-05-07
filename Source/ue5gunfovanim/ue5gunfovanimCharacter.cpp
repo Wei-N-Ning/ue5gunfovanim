@@ -38,7 +38,7 @@ Aue5gunfovanimCharacter::Aue5gunfovanimCharacter()
 	// Initialize the debug gun mesh
 	GunMesh = CreateDefaultSubobject<UViewModelSkeletalMeshComponent>(TEXT("GunMesh1P"));
 	GunMesh->SetOnlyOwnerSee(true);
-	GunMesh->SetupAttachment(FirstPersonCameraComponent);
+	// GunMesh->SetupAttachment(FirstPersonCameraComponent);
 	GunMesh->bCastDynamicShadow = false;
 	GunMesh->CastShadow = false;
 }
@@ -57,6 +57,8 @@ void Aue5gunfovanimCharacter::BeginPlay()
 			Subsystem->AddMappingContext(DefaultMappingContext, 0);
 		}
 	}
+
+	SetHasRifle(true);
 }
 
 //////////////////////////////////////////////////////////////////////////// Input
