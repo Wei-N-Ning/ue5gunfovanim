@@ -89,17 +89,8 @@ FMatrix UViewModelSkeletalMeshComponent::GetRenderMatrix() const
 		};
 	}
 
-	FTransform ComponentTransform = GetComponentTransform();
-	if (UseParentComponent)
-	{
-		if (const auto Parent = GetAttachParent())
-		{
-			AddDebugMessage(FString::Printf(TEXT("Parent: %ls"), *Parent->GetName()));
-			ComponentTransform = Parent->GetComponentTransform();
-			AddDebugMessage(ComponentTransform.ToString());
-		}
-	}
-
+	const FTransform ComponentTransform = GetComponentTransform();
+	AddDebugMessage(FString::Printf(TEXT("%ls tf: %ls"), *GetName(), *ComponentTransform.ToString()));
 	const FMatrix NewViewProjectionMatrix = ViewMatrix * NewProjectionMatrix;
 	const FMatrix InverseOldViewProjectionMatrix = InverseViewProjectionMatrix;
 	const FMatrix ModelMatrix = ComponentTransform.ToMatrixWithScale();
