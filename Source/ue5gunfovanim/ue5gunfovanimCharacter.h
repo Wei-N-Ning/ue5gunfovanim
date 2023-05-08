@@ -5,11 +5,11 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
+#include "ViewModelSkeletalMeshComponent.h"
 #include "ue5gunfovanimCharacter.generated.h"
 
 class UInputComponent;
 class USkeletalMeshComponent;
-class UViewModelSkeletalMeshComponent;
 class USceneComponent;
 class UCameraComponent;
 class UAnimMontage;
@@ -22,12 +22,12 @@ class Aue5gunfovanimCharacter : public ACharacter
 
 	/** Pawn mesh: 1st person view (arms; seen only by self) */
 	UPROPERTY(VisibleDefaultsOnly, Category=Mesh)
-	USkeletalMeshComponent* Mesh1P;
+	UViewModelSkeletalMeshComponent* Mesh1P;
 
 	// debug mesh - to set it to the gun skelmesh and compare to the standalone gun
 	UPROPERTY(VisibleDefaultsOnly, Category = Weapon)
 	UViewModelSkeletalMeshComponent* GunMesh;
-	
+
 	/** First person camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	UCameraComponent* FirstPersonCameraComponent;
@@ -44,15 +44,13 @@ class Aue5gunfovanimCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	class UInputAction* MoveAction;
 
-	
 public:
 	Aue5gunfovanimCharacter();
 
 protected:
-	virtual void BeginPlay();
+	virtual void BeginPlay() override;
 
 public:
-		
 	/** Look Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	class UInputAction* LookAction;
@@ -83,10 +81,7 @@ protected:
 
 public:
 	/** Returns Mesh1P subobject **/
-	USkeletalMeshComponent* GetMesh1P() const { return Mesh1P; }
+	USkeletalMeshComponent* GetMesh1P() const { return Cast<USkeletalMeshComponent>(Mesh1P); }
 	/** Returns FirstPersonCameraComponent subobject **/
 	UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
-
-
 };
-

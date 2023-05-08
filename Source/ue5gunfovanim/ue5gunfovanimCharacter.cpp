@@ -27,20 +27,23 @@ Aue5gunfovanimCharacter::Aue5gunfovanimCharacter()
 	FirstPersonCameraComponent->bUsePawnControlRotation = true;
 
 	// Create a mesh component that will be used when being viewed from a '1st person' view (when controlling this pawn)
-	Mesh1P = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("CharacterMesh1P"));
+	Mesh1P = CreateDefaultSubobject<UViewModelSkeletalMeshComponent>(TEXT("CharacterMesh1P"));
 	Mesh1P->SetOnlyOwnerSee(true);
 	Mesh1P->SetupAttachment(FirstPersonCameraComponent);
 	Mesh1P->bCastDynamicShadow = false;
 	Mesh1P->CastShadow = false;
-	//Mesh1P->SetRelativeRotation(FRotator(0.9f, -19.19f, 5.2f));
 	Mesh1P->SetRelativeLocation(FVector(-30.f, 0.f, -150.f));
+	Mesh1P->DesiredHorizontalFov = 120.f;
 
 	// Initialize the debug gun mesh
 	GunMesh = CreateDefaultSubobject<UViewModelSkeletalMeshComponent>(TEXT("GunMesh1P"));
 	GunMesh->SetOnlyOwnerSee(true);
-	// GunMesh->SetupAttachment(FirstPersonCameraComponent);
+	GunMesh->SetupAttachment(Mesh1P, FName("GripPoint"));
 	GunMesh->bCastDynamicShadow = false;
 	GunMesh->CastShadow = false;
+	GunMesh->DesiredHorizontalFov = 120.f;
+	// GunMesh->SetRelativeLocation(FVector(20.f, 20.f, -20.f));
+	// GunMesh->SetRelativeRotation(FRotator(0.f, -100.f, 0.f));
 }
 
 void Aue5gunfovanimCharacter::BeginPlay()
@@ -59,6 +62,10 @@ void Aue5gunfovanimCharacter::BeginPlay()
 	}
 
 	SetHasRifle(true);
+
+	FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, false);
+	// GunMesh->AttachToComponent(Mesh1P, Rules, TEXT("GripPoint"));
+	// GunMesh->SetupAttachment(FirstPersonCameraComponent);
 }
 
 //////////////////////////////////////////////////////////////////////////// Input

@@ -90,7 +90,7 @@ FMatrix UViewModelSkeletalMeshComponent::GetRenderMatrix() const
 	}
 
 	FTransform ComponentTransform = GetComponentTransform();
-	AddDebugMessage(FString::Printf(TEXT("%ls tf: %ls"), *GetName(), *ComponentTransform.ToString()));
+
 	const FMatrix NewViewProjectionMatrix = ViewMatrix * NewProjectionMatrix;
 	const FMatrix InverseOldViewProjectionMatrix = InverseViewProjectionMatrix;
 	const FMatrix ModelMatrix = ComponentTransform.ToMatrixWithScale();
@@ -98,6 +98,10 @@ FMatrix UViewModelSkeletalMeshComponent::GetRenderMatrix() const
 	// M . V . P' . (P . V)^-1
 	// then when it's used to transform the vertices (combined with V . P), it becomes
 	// M . V . P' . (P . V)^-1 . (P . V) = M . V . P'
+
+	AddDebugMessage(FString::Printf(TEXT("%ls SU: %ls"), *GetName(), *Super::GetRenderMatrix().ToString()));
+	AddDebugMessage(FString::Printf(TEXT("%ls CO: %ls"), *GetName(), *ModelMatrix.ToString()));
+
 	return ModelMatrix * NewViewProjectionMatrix /*MVP'*/ * InverseOldViewProjectionMatrix;
 }
 
