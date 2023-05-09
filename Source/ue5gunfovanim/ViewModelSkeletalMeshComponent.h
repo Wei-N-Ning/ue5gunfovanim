@@ -17,7 +17,7 @@ struct FMatrices
 /**
  * 
  */
-UCLASS()
+UCLASS(Blueprintable, BlueprintType, ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class UE5GUNFOVANIM_API UViewModelSkeletalMeshComponent : public USkeletalMeshComponent
 {
 public:
