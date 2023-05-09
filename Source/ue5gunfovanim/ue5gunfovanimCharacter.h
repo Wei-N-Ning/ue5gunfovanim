@@ -7,6 +7,7 @@
 #include "InputActionValue.h"
 #include "ue5gunfovanimCharacter.generated.h"
 
+class AFpsWeapon;
 class UViewModelSkeletalMeshComponent;
 class UInputComponent;
 class USkeletalMeshComponent;
@@ -80,6 +81,9 @@ protected:
 public:
 	UPROPERTY()
 	UViewModelSkeletalMeshComponent* PickUpWeapon = nullptr;
+
+	UPROPERTY(BlueprintReadWrite, Category = Weapon)
+	AFpsWeapon* PickUpFpsWeapon = nullptr;
 
 	/** Returns Mesh1P subobject **/
 	USkeletalMeshComponent* GetMesh1P() const { return Mesh1P; }

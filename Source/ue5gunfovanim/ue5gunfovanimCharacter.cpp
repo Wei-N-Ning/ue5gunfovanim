@@ -7,6 +7,7 @@
 #include "Components/CapsuleComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "FpsWeapon.h"
 #include "ViewModelSkeletalMeshComponent.h"
 
 
@@ -102,14 +103,17 @@ void Aue5gunfovanimCharacter::Look(const FInputActionValue& Value)
 void Aue5gunfovanimCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
-
+	FVector Loc;
+	FRotator Rot;
+	Mesh1P->GetSocketWorldLocationAndRotation("GripPoint", Loc, Rot);
 	if (PickUpWeapon)
 	{
-		FVector Loc;
-		FRotator Rot;
-		Mesh1P->GetSocketWorldLocationAndRotation("GripPoint", Loc, Rot);
 		PickUpWeapon->SetWorldLocation(Loc);
 		PickUpWeapon->SetWorldRotation(Rot);
+	}
+	if (PickUpFpsWeapon)
+	{
+		PickUpFpsWeapon->SetActorLocationAndRotation(Loc, Rot);
 	}
 }
 
