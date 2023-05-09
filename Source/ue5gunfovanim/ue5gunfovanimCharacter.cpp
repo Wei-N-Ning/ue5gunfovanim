@@ -103,18 +103,18 @@ void Aue5gunfovanimCharacter::Look(const FInputActionValue& Value)
 void Aue5gunfovanimCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
-	FVector Loc;
-	FRotator Rot;
-	Mesh1P->GetSocketWorldLocationAndRotation("GripPoint", Loc, Rot);
-	if (PickUpWeapon)
-	{
-		PickUpWeapon->SetWorldLocation(Loc);
-		PickUpWeapon->SetWorldRotation(Rot);
-	}
-	if (PickUpFpsWeapon)
-	{
-		PickUpFpsWeapon->SetActorLocationAndRotation(Loc, Rot);
-	}
+	// FVector Loc;
+	// FRotator Rot;
+	// Mesh1P->GetSocketWorldLocationAndRotation("GripPoint", Loc, Rot);
+	// if (PickUpWeapon)
+	// {
+	// 	PickUpWeapon->SetWorldLocation(Loc);
+	// 	PickUpWeapon->SetWorldRotation(Rot);
+	// }
+	// if (PickUpFpsWeapon)
+	// {
+	// 	PickUpFpsWeapon->SetActorLocationAndRotation(Loc, Rot);
+	// }
 }
 
 void Aue5gunfovanimCharacter::SetHasRifle(bool bNewHasRifle)
