@@ -7,6 +7,7 @@
 #include "InputActionValue.h"
 #include "ue5gunfovanimCharacter.generated.h"
 
+class UViewModelSkeletalMeshComponent;
 class UInputComponent;
 class USkeletalMeshComponent;
 class USceneComponent;
@@ -69,12 +70,17 @@ protected:
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
 
+	virtual void Tick(float DeltaSeconds) override;
+
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(UInputComponent* InputComponent) override;
 	// End of APawn interface
 
 public:
+	UPROPERTY()
+	UViewModelSkeletalMeshComponent* PickUpWeapon = nullptr;
+
 	/** Returns Mesh1P subobject **/
 	USkeletalMeshComponent* GetMesh1P() const { return Mesh1P; }
 	/** Returns FirstPersonCameraComponent subobject **/
