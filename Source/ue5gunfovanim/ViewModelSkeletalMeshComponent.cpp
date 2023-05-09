@@ -92,10 +92,12 @@ FMatrix UViewModelSkeletalMeshComponent::GetRenderMatrix() const
 	const FMatrix InverseOldViewProjectionMatrix = InverseViewProjectionMatrix;
 	const FMatrix ModelMatrix = ComponentTransform.ToMatrixWithScale();
 
-	// M . V . P' . (P . V)^-1
-	// then when it's used to transform the vertices (combined with V . P), it becomes
-	// M . V . P' . (P . V)^-1 . (P . V) = M . V . P'
-	return ModelMatrix * NewViewProjectionMatrix /*MVP'*/ * InverseOldViewProjectionMatrix;
+	// the returned matrix is essentially:
+	// M . V . P' . (V . P)^-1
+	// then when it's used to transform the vertices during the rendering stage,
+	// multiplied by (V . P), the result is
+	// M . V . P' . (V . P)^-1 . (V . P) = M . V . P'
+	return ModelMatrix * NewViewProjectionMatrix * InverseOldViewProjectionMatrix;
 }
 
 FMatrices UViewModelSkeletalMeshComponent::GetMatrices(const UWorld& World) const

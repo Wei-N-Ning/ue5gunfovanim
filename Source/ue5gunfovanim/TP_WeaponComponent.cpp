@@ -75,12 +75,12 @@ void UTP_WeaponComponent::AttachWeapon(Aue5gunfovanimCharacter* TargetCharacter)
 	}
 
 	// Attach the weapon to the First Person Character
-	const FAttachmentTransformRules AttachmentRules(
-		EAttachmentRule::SnapToTarget,
-		EAttachmentRule::SnapToTarget,
-		EAttachmentRule::SnapToTarget,
-		true
-	);
+	// const FAttachmentTransformRules AttachmentRules(
+	// 	EAttachmentRule::SnapToTarget,
+	// 	EAttachmentRule::SnapToTarget,
+	// 	EAttachmentRule::SnapToTarget,
+	// 	true
+	// );
 	// AttachToComponent(Character->GetMesh1P(), AttachmentRules, FName(TEXT("GripPoint")));
 	// AttachToComponent(Character->GetFirstPersonCameraComponent(), AttachmentRules);
 
