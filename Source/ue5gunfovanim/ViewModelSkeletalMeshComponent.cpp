@@ -110,7 +110,7 @@ void UViewModelSkeletalMeshComponent::AddDebugMessage(FString&& Message) const
 		if (const auto PlayerController = World->GetFirstPlayerController())
 		{
 			const auto hud = Cast<ADebugHud>(PlayerController->GetHUD());
-			hud->AddDebugMessage(Message, FColor::Green, 1.25f);
+			hud->AddDebugMessage(GetTypeHash(GetName()), Message, FColor::Green, 1.25f);
 		}
 	}
 }

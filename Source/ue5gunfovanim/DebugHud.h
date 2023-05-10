@@ -4,7 +4,18 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/HUD.h"
+#include "Containers/Map.h"
 #include "DebugHud.generated.h"
+
+USTRUCT()
+struct FDebugMessage
+{
+	GENERATED_BODY()
+
+	FText Message;
+	FColor Color;
+	float TextSize;
+};
 
 /**
  * 
@@ -21,21 +32,17 @@ public:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
 
-	UFUNCTION(BlueprintCallable, Category = "Debug")
-	void AddDebugMessage(const FString& Message, const FColor& Color, float TextSize);
+	void AddDebugMessage(uint64 Id, const FString& Message, const FColor& Color, float TextSize);
 
 private:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Debug", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY()
 	UFont* DebugFont;
 
-	UPROPERTY(Transient)
-	TArray<FText> DebugMessages;
+	UPROPERTY()
+	TArray<uint64> Ids;
 
-	UPROPERTY(Transient)
-	TArray<FColor> DebugMessageColors;
-
-	UPROPERTY(Transient)
-	TArray<float> DebugMessageTextSizes;
+	UPROPERTY()
+	TMap<uint64, FDebugMessage> DebugMessageById;
 
 	bool bDisplayDebugMessages;
 };
