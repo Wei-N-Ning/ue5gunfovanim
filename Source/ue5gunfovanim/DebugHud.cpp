@@ -82,5 +82,5 @@ void ADebugHud::DrawHUD()
 // AddDebugMessage("there is a cow", FColor::Orange, 1.25f);
 void ADebugHud::AddDebugMessage(uint64 Id, const FString& Message, const FColor& Color, const float TextSize)
 {
-	DebugMessagesById[Id].Add(FDebugMessage{FText::FromString(Message), Color, TextSize});
+	DebugMessagesById.FindOrAdd(Id).Add(FDebugMessage{FText::FromString(Message), Color, TextSize});
 }
