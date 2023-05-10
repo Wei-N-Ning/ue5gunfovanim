@@ -4,16 +4,6 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "ViewModelSkeletalMeshComponent.generated.h"
 
-struct FMatrices
-{
-	FMatrix ViewMatrix;
-	FMatrix InverseViewMatrix;
-	FMatrix ProjectionMatrix;
-	FMatrix InverseProjectionMatrix;
-	FMatrix InverseViewProjectionMatrix;
-	float NearClippingPlaneDistance;
-};
-
 /**
  * 
  */
@@ -45,8 +35,4 @@ public:
 	// where P' is the new projection matrix with the desired FOV
 	GENERATED_BODY()
 	virtual FMatrix GetRenderMatrix() const override;
-
-private:
-	// GetMatrices must only be called when the PlayerController is valid and there is a LocalPlayer
-	FMatrices GetMatrices(const UWorld& World) const;
 };

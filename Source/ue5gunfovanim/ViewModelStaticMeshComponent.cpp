@@ -1,10 +1,12 @@
-﻿#include "ViewModelSkeletalMeshComponent.h"
+// Fill out your copyright notice in the Description page of Project Settings.
+
+
+#include "ViewModelStaticMeshComponent.h"
+
 #include "FovUtils.h"
 #include "ViewProjectionUtils.h"
-#include "Engine/LocalPlayer.h"
-#include "GameFramework/PlayerController.h"
 
-FMatrix UViewModelSkeletalMeshComponent::GetRenderMatrix() const
+FMatrix UViewModelStaticMeshComponent::GetRenderMatrix() const
 {
 	// ensure the custom render matrix is enabled
 	if (!EnableCustomRenderMatrix)
