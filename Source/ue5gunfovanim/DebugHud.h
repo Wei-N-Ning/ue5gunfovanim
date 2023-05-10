@@ -7,11 +7,8 @@
 #include "Containers/Map.h"
 #include "DebugHud.generated.h"
 
-USTRUCT()
 struct FDebugMessage
 {
-	GENERATED_BODY()
-
 	FText Message;
 	FColor Color;
 	float TextSize;
@@ -38,11 +35,7 @@ private:
 	UPROPERTY()
 	UFont* DebugFont;
 
-	UPROPERTY()
-	TArray<uint64> Ids;
-
-	UPROPERTY()
-	TMap<uint64, FDebugMessage> DebugMessageById;
+	TMap<uint64, TArray<FDebugMessage>> DebugMessagesById;
 
 	bool bDisplayDebugMessages;
 };

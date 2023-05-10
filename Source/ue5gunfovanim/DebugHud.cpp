@@ -39,20 +39,23 @@ void ADebugHud::DrawHUD()
 	if (bDisplayDebugMessages)
 	{
 		float Y = 5.0f;
+		TArray<uint64> Ids;
+		DebugMessagesById.GetKeys(Ids);
 		Ids.Sort();
 		for (const auto Id : Ids)
 		{
-			const auto [Message, Color, TextSize] = DebugMessageById[Id];
-			constexpr float LineHeight = 17.0f;
-			constexpr float LineHorizontalMargin = 5.0f;
-			const FVector2D Position(LineHorizontalMargin, Y);
-			Y += LineHeight * TextSize;
-			FCanvasTextItem TextItem(Position, Message, DebugFont, Color);
-			TextItem.Scale = FVector2D(TextSize, TextSize);
-			Canvas->DrawItem(TextItem);
+			for (const auto& [Message, Color, TextSize] : DebugMessagesById[Id])
+			{
+				constexpr float LineHeight = 17.0f;
+				constexpr float LineHorizontalMargin = 5.0f;
+				const FVector2D Position(LineHorizontalMargin, Y);
+				Y += LineHeight * TextSize;
+				FCanvasTextItem TextItem(Position, Message, DebugFont, Color);
+				TextItem.Scale = FVector2D(TextSize, TextSize);
+				Canvas->DrawItem(TextItem);
+			}
 		}
-		Ids.Reset();
-		DebugMessageById.Reset();
+		DebugMessagesById.Reset();
 	}
 }
 
@@ -79,8 +82,5 @@ void ADebugHud::DrawHUD()
 // AddDebugMessage("there is a cow", FColor::Orange, 1.25f);
 void ADebugHud::AddDebugMessage(uint64 Id, const FString& Message, const FColor& Color, const float TextSize)
 {
-	Ids.Add(Id);
-	DebugMessageById.Add(TTuple<int64, FDebugMessage>{
-		Id, FDebugMessage{FText::FromString(Message), Color, TextSize}
-	});
+	DebugMessagesById[Id].Add(FDebugMessage{FText::FromString(Message), Color, TextSize});
 }
