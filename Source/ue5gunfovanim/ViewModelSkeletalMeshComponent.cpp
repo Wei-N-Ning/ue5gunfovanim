@@ -92,6 +92,7 @@ FMatrix UViewModelSkeletalMeshComponent::GetRenderMatrix() const
 	const FTransform ComponentTransform = GetComponentTransform();
 	AddDebugMessage(GetName());
 	AddDebugMessage(FString::Printf(TEXT("TF: %ls"), *ComponentTransform.ToString()));
+	AddDebugMessage(FString::Printf(TEXT("REL: %ls"), *GetRelativeTransform().ToString()));
 	const FMatrix NewViewProjectionMatrix = ViewMatrix * NewProjectionMatrix;
 	const FMatrix InverseOldViewProjectionMatrix = InverseViewProjectionMatrix;
 	const FMatrix ModelMatrix = ComponentTransform.ToMatrixWithScale();

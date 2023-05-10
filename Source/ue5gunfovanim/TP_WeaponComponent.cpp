@@ -104,6 +104,7 @@ void UTP_WeaponComponent::AttachWeapon(Aue5gunfovanimCharacter* TargetCharacter)
 		}
 	}
 
+	EnableCustomRenderMatrix = true;
 	Character->PickUpWeapon = this;
 }
 
