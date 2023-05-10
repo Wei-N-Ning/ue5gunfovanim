@@ -10,6 +10,8 @@
 UCLASS(Blueprintable, BlueprintType, ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class UE5GUNFOVANIM_API UViewModelSkeletalMeshComponent : public USkeletalMeshComponent
 {
+	GENERATED_BODY()
+
 public:
 	UPROPERTY(EditAnywhere, Category=Mesh)
 	float DesiredHorizontalFov;
@@ -17,6 +19,7 @@ public:
 	UPROPERTY(EditAnywhere, Category=Mesh)
 	bool EnableCustomRenderMatrix = true;
 
+protected:
 	// The calculation to render an object with a camera that has the World FOV is
 	// M . V . P = T
 	// where
@@ -33,6 +36,8 @@ public:
 	// then when it's used to transform the vertices (combined with V . P), it becomes
 	// M . V . P' . (P . V)^-1 . (P . V) = M . V . P'
 	// where P' is the new projection matrix with the desired FOV
-	GENERATED_BODY()
 	virtual FMatrix GetRenderMatrix() const override;
+
+private:
+	void AddDebugMessage(FString&& Message) const;
 };

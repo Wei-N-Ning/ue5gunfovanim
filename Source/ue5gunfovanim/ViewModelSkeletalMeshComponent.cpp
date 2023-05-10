@@ -1,6 +1,7 @@
 ﻿#include "ViewModelSkeletalMeshComponent.h"
 #include "FovUtils.h"
 #include "ViewProjectionUtils.h"
+#include "DebugHud.h"
 #include "Engine/LocalPlayer.h"
 #include "GameFramework/PlayerController.h"
 
@@ -99,4 +100,16 @@ FMatrix UViewModelSkeletalMeshComponent::GetRenderMatrix() const
 	// multiplied by (V . P), the result is
 	// M . V . P' . (V . P)^-1 . (V . P) = M . V . P'
 	return ModelMatrix * NewViewProjectionMatrix * InverseOldViewProjectionMatrix;
+}
+
+void UViewModelSkeletalMeshComponent::AddDebugMessage(FString&& Message) const
+{
+	if (const auto World = GetWorld())
+	{
+		if (const auto PlayerController = World->GetFirstPlayerController())
+		{
+			const auto hud = Cast<ADebugHud>(PlayerController->GetHUD());
+			hud->AddDebugMessage(Message, FColor::Green, 1.25f);
+		}
+	}
 }

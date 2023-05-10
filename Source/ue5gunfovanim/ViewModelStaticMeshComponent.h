@@ -14,11 +14,16 @@ class UE5GUNFOVANIM_API UViewModelStaticMeshComponent : public UStaticMeshCompon
 {
 	GENERATED_BODY()
 
+public:
 	UPROPERTY(EditAnywhere, Category=Mesh)
 	float DesiredHorizontalFov;
 
 	UPROPERTY(EditAnywhere, Category=Mesh)
 	bool EnableCustomRenderMatrix = true;
 
+protected:
 	virtual FMatrix GetRenderMatrix() const override;
+
+private:
+	void AddDebugMessage(FString&& Message) const;
 };

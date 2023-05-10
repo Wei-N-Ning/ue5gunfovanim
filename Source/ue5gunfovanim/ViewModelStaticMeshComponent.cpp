@@ -3,6 +3,7 @@
 
 #include "ViewModelStaticMeshComponent.h"
 
+#include "DebugHud.h"
 #include "FovUtils.h"
 #include "ViewProjectionUtils.h"
 
@@ -101,4 +102,16 @@ FMatrix UViewModelStaticMeshComponent::GetRenderMatrix() const
 	// multiplied by (V . P), the result is
 	// M . V . P' . (V . P)^-1 . (V . P) = M . V . P'
 	return ModelMatrix * NewViewProjectionMatrix * InverseOldViewProjectionMatrix;
+}
+
+void UViewModelStaticMeshComponent::AddDebugMessage(FString&& Message) const
+{
+	if (const auto World = GetWorld())
+	{
+		if (const auto PlayerController = World->GetFirstPlayerController())
+		{
+			const auto hud = Cast<ADebugHud>(PlayerController->GetHUD());
+			hud->AddDebugMessage(Message, FColor::Green, 1.25f);
+		}
+	}
 }
