@@ -89,6 +89,7 @@ ViewProjectionUtils::FMatrices ViewProjectionUtils::GetMatrices(const UWorld& Wo
 	Matrices.InverseViewMatrix = ViewMatrix.Inverse();
 	Matrices.ProjectionMatrix = ProjectionData.ProjectionMatrix;
 	Matrices.InverseProjectionMatrix = ProjectionData.ProjectionMatrix.Inverse();
+	// note: (VP)^-1 = P^-1 * V^-1, the order reverses
 	Matrices.InverseViewProjectionMatrix = Matrices.InverseProjectionMatrix * Matrices.InverseViewMatrix;
 	Matrices.NearClippingPlaneDistance = Matrices.ProjectionMatrix.M[3][2];
 
